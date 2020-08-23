@@ -88,7 +88,7 @@ def explore_data(dataset):
     return df
 
 # Load cover image
-st.image(load_image('TED.jpg'))
+# st.image(load_image('TED.jpg'))
 
 # Title
 st.title("TED EDA App")
