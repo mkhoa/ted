@@ -109,21 +109,4 @@ st.write("""
 st.write("""
 # TED EDA
 ## Overview of the dataset
-
 """)
-
-# Load dataset
-df = pd.read_gbq('SELECT * FROM `optical-scarab-285012.ted_talk.Ted_Talk`', project_id='optical-scarab-285012')
-data = explore_data(df)
-
-# Reorder the columns
-data = data[['title', 'main_speaker', 'views', 'published_date', 'comments', 'description', 'name', 'speaker_occupation', 'num_speaker', 'duration', 'event', 'film_date' , 'tags', 'languages', 'ratings', 'related_talks', 'url']]
-
-# Show preview of the data set
-if st.checkbox("Preview Dataset"):
-    if st.button("Head"):
-        st.write(data.head())
-    elif st.button("Tail"):
-        st.write(data.tail())
-    else:
-        st.write(data.sample(10))
