@@ -70,26 +70,6 @@ def createWordCloud (text):
   plt.axis('off')
   plt.show()
 
-
-## Streamlit
-'''Initiate Streamlit
-
-'''
-# Images
-@st.cache
-def load_image(img):
-    im = Image.open(os.path.join(img))
-    return im
-
-# Function to load Dataset
-@st.cache(persist=True)
-def explore_data(dataset):
-    df = pd.read_csv(os.path.join(dataset))
-    return df
-
-# Load cover image
-# st.image(load_image('TED.jpg'))
-
 # Title
 st.title("TED EDA App")
 st.text("A Ted talk about Ted talks")
