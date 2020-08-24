@@ -60,7 +60,6 @@ def days_between(d1, d2):
     return abs((d2 - d1).days)
 
 #Create World Cloud
-@st.cache
 def createWordCloud (text):
   occurrences = collections.Counter(text)
   cloud = wordcloud.WordCloud(background_color="white", width=1920, height=1080, min_font_size=8)
@@ -85,7 +84,7 @@ def load_data(query):
   return df
 
 # Load cover image
-st.image(load_image('/content/ted-master/TED.jpg'))
+st.image('https://gln.edu.vn/wp-content/uploads/2019/09/5-ly-ban-nen-hoc-tieng-anh-qua-ted-talks-01.png')
 
 # Title
 st.title("TED EDA App")
@@ -275,13 +274,19 @@ sns.set_style('whitegrid')
 plt.figure(figsize=(10,6))
 number_of_talks = st.selectbox("Select number of talks", ("10", "20", "30"))
 if number_of_talks == "10":
-    st.write(sns.barplot(x='main_speaker', y='views', data=most_viewd_talks[:10], ci=None))
+    chart = sns.barplot(x='main_speaker', y='views', data=most_viewd_talks[:10], ci=None)
+    chart.set_xticklabels(chart.get_xticklabels(), rotation=90, horizontalalignment='right')
+    st.write(chart)
     st.pyplot()
 elif number_of_talks == "20":
-    st.write(sns.barplot(x='main_speaker', y='views', data=most_viewd_talks[:20], ci=None))
+    chart = sns.barplot(x='main_speaker', y='views', data=most_viewd_talks[:20], ci=None)
+    chart.set_xticklabels(chart.get_xticklabels(), rotation=90, horizontalalignment='right')
+    st.write(chart)
     st.pyplot()
 else:
-    st.write(sns.barplot(x='main_speaker', y='views', data=most_viewd_talks[:30], ci=None))
+    sns.barplot(x='main_speaker', y='views', data=most_viewd_talks[:30], ci=None)
+    chart.set_xticklabels(chart.get_xticklabels(), rotation=90, horizontalalignment='right')
+    st.write(chart)
     st.pyplot()
 
 # Most Controversial Talk
@@ -342,6 +347,7 @@ rating_count = df_ratings.groupby('rating_name').sum()['rating_count']
 plt.figure()
 plt.bar(rating_list, rating_count)
 plt.xlabel("Rating Name")
+plt.xticks(rotation=90)
 plt.ylabel("Rating Count")
 plt.title("Total rating of TED Talks")
 plt.ticklabel_format(style='plain', axis='y')
@@ -426,3 +432,10 @@ st.pyplot()
 a = df[df['tedfellows'] == 1]['score'] # Speak with returned speaker
 b = df[df['tedfellows'] == 0]['score'] # Speak with first time speaker
 st.write(ttest_ind(a, b, equal_var=False))
+
+st.write('''
+**Conclusion**
+* Returned Speaker can have positive impact on TED Talk video
+* User are expecting Inspiring, Informative, and Fascinating from TED Videos
+* Having translated transcript can increase the reach of TED videos and get more views
+* Hot trend right now for TED video is: Technology, Science and Global Issues''')
